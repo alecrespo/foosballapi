@@ -15,7 +15,6 @@ namespace Ecovadis.DL.Models
     public class MatchDto
     {
         public int Id { get; set; }
-        public bool WasOneSided { get; set; }
         public bool IsFinished { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime? EndTime { get; set; }
