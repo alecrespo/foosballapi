@@ -46,7 +46,8 @@ namespace Mash.API.Tests.Controllers
             var icontext = new EcovadisContext(optionsBuilder.Options);
 
             var logic = new LogicService();
-            var game = new GameService(logic, imapper, icontext);
+            var error = new ErrorHandler();
+            var game = new GameService(logic, imapper, error, icontext);
             return new MatchController(ierrorHandler, game);
         }
         [Fact]

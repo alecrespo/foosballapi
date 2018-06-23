@@ -1,4 +1,5 @@
-﻿using Ecovadis.DL.Models;
+﻿using Ecovadis.API.Infrastructures;
+using Ecovadis.DL.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -39,6 +40,10 @@ namespace Ecovadis.API.Infrastructure.Middlewares
             var code = HttpStatusCode.InternalServerError;           
             if (exception is ArgumentNullException) code = HttpStatusCode.BadRequest;
             else if (exception is HttpRequestException) code = HttpStatusCode.BadRequest;
+            else if (exception is TableSideException) code = HttpStatusCode.BadRequest;
+            else if (exception is EntityNullException) code = HttpStatusCode.NotFound;
+            else if (exception is FinishedMatchException) code = HttpStatusCode.Forbidden;
+            else if (exception is DbUpdateConcurrencyException) code = HttpStatusCode.Forbidden;
             else if (exception is UnauthorizedAccessException) code = HttpStatusCode.Unauthorized;
             return WriteExceptionAsync(context, exception, code);
         }

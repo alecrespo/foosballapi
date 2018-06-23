@@ -4,6 +4,7 @@ using Ecovadis.API;
 using Ecovadis.API.Services;
 using Ecovadis.DAL.Contexts;
 using Ecovadis.DAL.Models;
+using Ecovadis.DL.Infrastructures;
 using Ecovadis.DL.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -38,7 +39,8 @@ namespace Ecovadis.DL.Tests.Services
 
             icontext = new EcovadisContext(optionsBuilder.Options);
             var logic = new LogicService();
-            game = new GameService(logic, mapper,icontext);
+            var error = new ErrorHandler();
+            game = new GameService(logic, mapper, error, icontext);
         }
 
         [Fact]
